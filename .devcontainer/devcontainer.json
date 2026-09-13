@@ -1,0 +1,19 @@
+{
+	"name": "Laravel (titik-rawan-bcbanda)",
+	"image": "mcr.microsoft.com/devcontainers/php:1-8.4-bookworm",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "24"
+		}
+	},
+
+	"forwardPorts": [8000],
+	"portsAttributes": {
+		"8000": { "label": "Laravel (php artisan serve)" },
+		"5173": { "label": "Vite dev server" }
+	},
+
+	"postCreateCommand": "composer install && npm install && [ -f .env ] || cp .env.example .env && php artisan key:generate --ansi && touch database/database.sqlite && php artisan migrate --graceful --ansi",
+
+	"remoteUser": "vscode"
+}
