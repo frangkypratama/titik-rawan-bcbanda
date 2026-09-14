@@ -38,14 +38,14 @@
 
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">
-                                                <i class="cil-user"></i>
+                                                <i class="cil-credit-card"></i>
                                             </span>
                                             <input
-                                                type="email"
-                                                name="email"
+                                                type="text"
+                                                name="nip"
                                                 class="form-control"
-                                                placeholder="Email"
-                                                value="{{ old('email') }}"
+                                                placeholder="NIP"
+                                                value="{{ old('nip') }}"
                                                 autofocus
                                                 required
                                             >

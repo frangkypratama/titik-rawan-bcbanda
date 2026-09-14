@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\TitikRawanController;
+use App\Http\Controllers\UserController;
 use App\Models\TitikRawan;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::resource('titik-rawan', TitikRawanController::class);
+    Route::resource('users', UserController::class)->except('show');
 });

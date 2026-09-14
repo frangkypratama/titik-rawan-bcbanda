@@ -20,5 +20,12 @@
                 <i class="nav-icon cil-location-pin"></i> Data Titik Rawan
             </a>
         </li>
+
+        <li class="nav-title">System</li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                <i class="nav-icon cil-people"></i> User Management
+            </a>
+        </li>
     </ul>
 </div>

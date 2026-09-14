@@ -91,13 +91,17 @@
                                     <a href="{{ route('titik-rawan.edit', $titik) }}" class="btn btn-sm btn-primary" title="Edit">
                                         <i class="cil-pencil"></i>
                                     </a>
-                                    <form action="{{ route('titik-rawan.destroy', $titik) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus titik ini?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
-                                            <i class="cil-trash"></i>
-                                        </button>
-                                    </form>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-danger"
+                                        title="Hapus"
+                                        data-coreui-toggle="modal"
+                                        data-coreui-target="#modal-hapus"
+                                        data-delete-url="{{ route('titik-rawan.destroy', $titik) }}"
+                                        data-delete-label="{{ $titik->nama }}"
+                                    >
+                                        <i class="cil-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @empty

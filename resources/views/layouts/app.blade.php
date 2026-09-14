@@ -26,6 +26,8 @@
             </footer>
         </div>
 
+        @include('partials.modal-hapus')
+
         @stack('scripts')
     </body>
 </html>
