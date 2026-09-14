@@ -1,3 +1,9 @@
 @use '@coreui/coreui/scss/coreui' with (
     $primary: #000080
 );
+
+.wrapper {
+    margin-inline-start: var(--cui-sidebar-occupy-start, 0);
+    transition: margin-inline-start 0.15s ease-in-out;
+}
+

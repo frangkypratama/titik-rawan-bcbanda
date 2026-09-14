@@ -17,8 +17,11 @@
                         <div class="card-group shadow-sm">
                             <div class="card p-4">
                                 <div class="card-body">
+                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:56px;height:56px;">
+                                        <i class="cil-location-pin text-white icon-lg"></i>
+                                    </div>
                                     <h1>Login</h1>
-                                    <p class="text-body-secondary">Masuk ke akun Anda</p>
+                                    <p class="text-body-secondary">Masuk ke akun Anda untuk mengelola data Titik Rawan</p>
 
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
@@ -77,9 +80,11 @@
                                 </div>
                             </div>
                             <div class="card text-white bg-primary py-5 d-md-down-none" style="width: 44%">
-                                <div class="card-body text-center d-flex flex-column justify-content-center">
-                                    <h2>{{ config('app.name', 'Laravel') }}</h2>
-                                    <p>Silakan hubungi administrator jika Anda belum memiliki akun.</p>
+                                <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                                    <i class="cil-map icon" style="width:64px;height:64px;"></i>
+                                    <h2 class="mt-3">{{ config('app.name', 'Titik Rawan') }}</h2>
+                                    <p>Pemetaan titik rawan &amp; landing spot berbasis lokasi.</p>
+                                    <p class="small mb-0">Silakan hubungi administrator jika Anda belum memiliki akun.</p>
                                 </div>
                             </div>
                         </div>

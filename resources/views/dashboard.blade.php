@@ -1,32 +1,72 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Dashboard &middot; {{ config('app.name', 'Laravel') }}</title>
+@section('title', 'Dashboard')
 
-        @fonts
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="bg-body-tertiary">
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-            <div class="container">
-                <span class="navbar-brand">{{ config('app.name', 'Laravel') }}</span>
-                <form method="POST" action="{{ route('logout') }}" class="d-flex">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
-                </form>
-            </div>
-        </nav>
-
-        <div class="container py-5">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="h4">Selamat datang, {{ auth()->user()->name }}</h1>
-                    <p class="text-body-secondary mb-0">Anda berhasil login sebagai {{ auth()->user()->email }}.</p>
+@section('content')
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-primary h-100">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fs-4 fw-semibold">{{ $totalTitik }}</div>
+                        <div class="small">Total Titik Rawan</div>
+                    </div>
+                    <i class="cil-location-pin icon icon-2xl"></i>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-info h-100">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fs-4 fw-semibold">{{ $totalKota }}</div>
+                        <div class="small">Kota/Kabupaten Terjangkau</div>
+                    </div>
+                    <i class="cil-map icon icon-2xl"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-success h-100">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fs-4 fw-semibold">{{ $totalJenisKapal }}</div>
+                        <div class="small">Jenis Kapal Terdata</div>
+                    </div>
+                    <i class="cil-boat-alt icon icon-2xl"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-warning h-100">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="fs-4 fw-semibold">{{ $perluVerifikasi }}</div>
+                        <div class="small">Perlu Verifikasi Koordinat</div>
+                    </div>
+                    <i class="cil-warning icon icon-2xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span><i class="cil-map me-2"></i>Peta Titik Rawan</span>
+            <a href="{{ route('titik-rawan.index') }}" class="btn btn-primary btn-sm">
+                <i class="cil-list me-1"></i> Lihat Data Titik Rawan
+            </a>
+        </div>
+        <div class="card-body p-0">
+            <div id="peta-titik-rawan" style="height: 480px; width: 100%;"></div>
+        </div>
+    </div>
+@endsection
+
+@push('scripts')
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            initTitikRawanMap('peta-titik-rawan', @json($titikRawanPoints));
+        });
+    </script>
+@endpush
