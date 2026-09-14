@@ -33,6 +33,9 @@ function escapeHtml(text) {
 
 function buildPopupContent(point) {
     const nama = escapeHtml(point.nama);
+    const namaHtml = point.show_url
+        ? `<a href="${escapeHtml(point.show_url)}" class="text-decoration-none">${nama}</a>`
+        : nama;
     const foto = point.foto_url
         ? `<img src="${escapeHtml(point.foto_url)}" alt="${nama}" class="img-fluid rounded mb-2" style="max-height:150px;object-fit:cover;width:100%">`
         : '';
@@ -50,7 +53,7 @@ function buildPopupContent(point) {
 
     return `
         <div style="min-width:220px">
-            <h6 class="mb-1">${nama}</h6>
+            <h6 class="mb-1">${namaHtml}</h6>
             ${subtitle}
             ${foto}
             ${deskripsi}
@@ -97,12 +100,9 @@ export function initPickerMap(elementId, latInputId, lngInputId, initialLat, ini
     const map = L.map(elementId).setView(center, hasInitial ? 15 : DEFAULT_ZOOM);
     addTileLayer(map);
 
-    let marker = hasInitial ? L.marker(center, { draggable: true }).addTo(map) : null;
+    let marker = null;
 
-    function setPosition(lat, lng) {
-        latInput.value = lat.toFixed(7);
-        lngInput.value = lng.toFixed(7);
-
+    function moveMarkerTo(lat, lng, { pan = false } = {}) {
         if (marker) {
             marker.setLatLng([lat, lng]);
         } else {
@@ -112,18 +112,40 @@ export function initPickerMap(elementId, latInputId, lngInputId, initialLat, ini
                 setPosition(pos.lat, pos.lng);
             });
         }
+
+        if (pan) {
+            map.panTo([lat, lng]);
+        }
     }
 
-    if (marker) {
-        marker.on('dragend', () => {
-            const pos = marker.getLatLng();
-            setPosition(pos.lat, pos.lng);
-        });
+    function setPosition(lat, lng) {
+        latInput.value = lat.toFixed(7);
+        lngInput.value = lng.toFixed(7);
+        moveMarkerTo(lat, lng);
+    }
+
+    if (hasInitial) {
+        moveMarkerTo(initialLat, initialLng);
     }
 
     map.on('click', (e) => {
         setPosition(e.latlng.lat, e.latlng.lng);
     });
+
+    function syncFromInputs() {
+        const lat = parseFloat(latInput.value);
+        const lng = parseFloat(lngInput.value);
+
+        if (
+            Number.isFinite(lat) && Number.isFinite(lng) &&
+            lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180
+        ) {
+            moveMarkerTo(lat, lng, { pan: true });
+        }
+    }
+
+    latInput.addEventListener('input', syncFromInputs);
+    lngInput.addEventListener('input', syncFromInputs);
 
     return map;
 }

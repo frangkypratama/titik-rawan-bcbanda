@@ -40,6 +40,7 @@ class TitikRawan extends Model
                 'foto_url' => $titik->fotoUrl(),
                 'akses' => $titik->akses,
                 'jenis_kapal' => $titik->jenis_kapal,
+                'show_url' => route('titik-rawan.show', $titik),
             ])->all();
     }
 }

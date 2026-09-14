@@ -35,17 +35,4 @@
             </li>
         </ul>
     </div>
-
-    <div class="header-divider"></div>
-
-    <div class="container-fluid">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb my-0">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('dashboard') }}" class="text-decoration-none">Home</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">@yield('title', 'Dashboard')</li>
-            </ol>
-        </nav>
-    </div>
 </header>
