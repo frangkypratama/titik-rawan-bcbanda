@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>@yield('title', 'Dashboard') &middot; {{ config('app.name', 'Laravel') }}</title>
+        <title>@yield('title', 'Dashboard')</title>
 
         @fonts
         @vite(['resources/css/app.css', 'resources/js/app.js'])

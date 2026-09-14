@@ -4,7 +4,7 @@
             <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;flex-shrink:0;">
                 <i class="cil-location-pin text-white"></i>
             </div>
-            <span class="fw-semibold fs-5 text-white">Titik Rawan</span>
+            <span class="fw-semibold fs-5 text-white">{{ config('app.name') }}</span>
         </div>
     </div>
 

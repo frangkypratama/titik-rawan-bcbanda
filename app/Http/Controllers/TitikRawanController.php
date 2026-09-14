@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class TitikRawanController extends Controller
 {
@@ -32,7 +33,7 @@ class TitikRawanController extends Controller
         $data = $this->validateData($request);
 
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('titik-rawan', 'public');
+            $data['foto'] = $request->file('foto')->store('titik-rawan', 'local');
         }
 
         TitikRawan::create($data);
@@ -51,10 +52,10 @@ class TitikRawanController extends Controller
 
         if ($request->hasFile('foto')) {
             if ($titikRawan->foto) {
-                Storage::disk('public')->delete($titikRawan->foto);
+                Storage::disk('local')->delete($titikRawan->foto);
             }
 
-            $data['foto'] = $request->file('foto')->store('titik-rawan', 'public');
+            $data['foto'] = $request->file('foto')->store('titik-rawan', 'local');
         }
 
         $titikRawan->update($data);
@@ -65,12 +66,19 @@ class TitikRawanController extends Controller
     public function destroy(TitikRawan $titikRawan): RedirectResponse
     {
         if ($titikRawan->foto) {
-            Storage::disk('public')->delete($titikRawan->foto);
+            Storage::disk('local')->delete($titikRawan->foto);
         }
 
         $titikRawan->delete();
 
         return redirect()->route('titik-rawan.index')->with('status', 'Titik rawan berhasil dihapus.');
+    }
+
+    public function foto(TitikRawan $titikRawan): StreamedResponse
+    {
+        abort_unless($titikRawan->foto && Storage::disk('local')->exists($titikRawan->foto), 404);
+
+        return Storage::disk('local')->response($titikRawan->foto);
     }
 
     private function validateData(Request $request): array

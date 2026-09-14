@@ -22,7 +22,7 @@ class TitikRawan extends Model
 
     public function fotoUrl(): ?string
     {
-        return $this->foto ? asset('storage/'.$this->foto) : null;
+        return $this->foto ? route('titik-rawan.foto', $this) : null;
     }
 
     public static function mapPoints(): array
