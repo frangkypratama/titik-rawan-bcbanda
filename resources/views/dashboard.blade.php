@@ -9,9 +9,9 @@
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <div class="fs-4 fw-semibold">{{ $totalTitik }}</div>
-                        <div class="small">Total Titik Rawan</div>
+                        <div class="small">Jumlah Titik Rawan</div>
                     </div>
-                    <i class="cil-location-pin icon icon-2xl"></i>
+                    <i class="cil-location-pin icon icon-xxl"></i>
                 </div>
             </div>
         </div>
@@ -20,9 +20,9 @@
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <div class="fs-4 fw-semibold">{{ $totalKota }}</div>
-                        <div class="small">Kota/Kabupaten Terjangkau</div>
+                        <div class="small">Kabupaten/Kota</div>
                     </div>
-                    <i class="cil-map icon icon-2xl"></i>
+                    <i class="cil-map icon icon-xxl"></i>
                 </div>
             </div>
         </div>
@@ -30,21 +30,21 @@
             <div class="card text-white bg-success h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <div class="fs-4 fw-semibold">{{ $totalJenisKapal }}</div>
-                        <div class="small">Jenis Kapal Terdata</div>
+                        <div class="fs-4 fw-semibold">{{ $aksesTerbuka }}</div>
+                        <div class="small">Akses Terbuka</div>
                     </div>
-                    <i class="cil-boat-alt icon icon-2xl"></i>
+                    <i class="cil-lock-unlocked icon icon-xxl"></i>
                 </div>
             </div>
         </div>
         <div class="col-sm-6 col-lg-3">
-            <div class="card text-white bg-warning h-100">
+            <div class="card text-white bg-danger h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <div class="fs-4 fw-semibold">{{ $perluVerifikasi }}</div>
-                        <div class="small">Perlu Verifikasi Koordinat</div>
+                        <div class="fs-4 fw-semibold">{{ $aksesTertutup }}</div>
+                        <div class="small">Akses Tertutup</div>
                     </div>
-                    <i class="cil-warning icon icon-2xl"></i>
+                    <i class="cil-lock-locked icon icon-xxl"></i>
                 </div>
             </div>
         </div>

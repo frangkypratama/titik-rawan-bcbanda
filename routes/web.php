@@ -22,8 +22,8 @@ Route::middleware('auth')->group(function () {
             'titikRawanPoints' => TitikRawan::mapPoints(),
             'totalTitik' => TitikRawan::count(),
             'totalKota' => TitikRawan::whereNotNull('kota_kabupaten')->distinct('kota_kabupaten')->count('kota_kabupaten'),
-            'totalJenisKapal' => TitikRawan::whereNotNull('jenis_kapal')->distinct('jenis_kapal')->count('jenis_kapal'),
-            'perluVerifikasi' => TitikRawan::whereNull('latitude')->orWhereNull('longitude')->count(),
+            'aksesTerbuka' => TitikRawan::where('akses', 'Terbuka')->count(),
+            'aksesTertutup' => TitikRawan::where('akses', 'Tertutup')->count(),
         ]);
     })->name('dashboard');
 

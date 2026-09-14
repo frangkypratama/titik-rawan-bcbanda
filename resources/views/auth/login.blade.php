@@ -9,88 +9,101 @@
         @fonts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="bg-body-tertiary">
-        <div class="min-vh-100 d-flex flex-row align-items-center">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card-group shadow-sm">
-                            <div class="card p-4">
-                                <div class="card-body">
-                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:56px;height:56px;">
-                                        <i class="cil-location-pin text-white icon-lg"></i>
+    <body>
+        <div class="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
+            <div class="container" style="max-width: 32rem">
+                <div class="d-flex flex-column gap-4">
+                    <div class="d-flex align-items-center justify-content-center gap-2">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;flex-shrink:0;">
+                            <i class="cil-location-pin text-white"></i>
+                        </div>
+                        <span class="fs-4 fw-semibold">{{ config('app.name') }}</span>
+                    </div>
+
+                    <div class="card p-4">
+                        <div class="card-body d-flex flex-column gap-4">
+                            <h2 class="h5 text-center">Masuk ke akun Anda</h2>
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger mb-0">
+                                    <ul class="mb-0 ps-3">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            <form class="row gap-3" method="POST" action="{{ route('login') }}">
+                                @csrf
+
+                                <div>
+                                    <label class="form-label" for="nip">NIP</label>
+                                    <input
+                                        class="form-control"
+                                        id="nip"
+                                        name="nip"
+                                        type="text"
+                                        placeholder="Masukkan NIP"
+                                        value="{{ old('nip') }}"
+                                        autofocus
+                                        required
+                                    >
+                                </div>
+
+                                <div>
+                                    <label class="form-label" for="password">Password</label>
+                                    <div class="input-group">
+                                        <input
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            type="password"
+                                            placeholder="Masukkan password"
+                                            required
+                                        >
+                                        <span class="input-group-text">
+                                            <button
+                                                class="bg-transparent border-0 p-0 link-secondary"
+                                                type="button"
+                                                id="toggle-password"
+                                                aria-label="Tampilkan password"
+                                            >
+                                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path fill="currentcolor" d="M256 144.927a103.309 103.309 0 1 0 103.309 103.309A103.426 103.426 0 0 0 256 144.927m0 174.618a71.309 71.309 0 1 1 71.309-71.309A71.39 71.39 0 0 1 256 319.545"></path>
+                                                    <path fill="currentcolor" d="m397.222 131.1-.218-.223c-77.75-77.749-204.258-77.749-282.008 0L16 233.79v28.893l98.778 102.689.218.222a199.41 199.41 0 0 0 282.008 0l99-102.911V233.79ZM464 249.79l-89.732 93.285a167.41 167.41 0 0 1-236.536 0L48 249.79v-3.107l89.729-93.283c65.247-65.13 171.3-65.13 236.542 0L464 246.683Z"></path>
+                                                    <path fill="currentcolor" d="M240 232h32v32h-32z"></path>
+                                                </svg>
+                                            </button>
+                                        </span>
                                     </div>
-                                    <h1>Login</h1>
-                                    <p class="text-body-secondary">Masuk ke akun Anda untuk mengelola data Titik Rawan</p>
-
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul class="mb-0 ps-3">
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
-
-                                    <form method="POST" action="{{ route('login') }}">
-                                        @csrf
-
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">
-                                                <i class="cil-credit-card"></i>
-                                            </span>
-                                            <input
-                                                type="text"
-                                                name="nip"
-                                                class="form-control"
-                                                placeholder="NIP"
-                                                value="{{ old('nip') }}"
-                                                autofocus
-                                                required
-                                            >
-                                        </div>
-
-                                        <div class="input-group mb-4">
-                                            <span class="input-group-text">
-                                                <i class="cil-lock-locked"></i>
-                                            </span>
-                                            <input
-                                                type="password"
-                                                name="password"
-                                                class="form-control"
-                                                placeholder="Password"
-                                                required
-                                            >
-                                        </div>
-
-                                        <div class="form-check mb-4">
-                                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                                            <label class="form-check-label" for="remember">
-                                                Ingat saya
-                                            </label>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <button type="submit" class="btn btn-primary px-4">Login</button>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
-                            </div>
-                            <div class="card text-white bg-primary py-5 d-md-down-none" style="width: 44%">
-                                <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
-                                    <i class="cil-map icon" style="width:64px;height:64px;"></i>
-                                    <h2 class="mt-3">{{ config('app.name', 'Titik Rawan') }}</h2>
-                                    <p>Pemetaan titik rawan &amp; landing spot berbasis lokasi.</p>
-                                    <p class="small mb-0">Silakan hubungi administrator jika Anda belum memiliki akun.</p>
+
+                                <div>
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember">
+                                        <span class="form-check-label">Ingat saya di perangkat ini</span>
+                                    </label>
                                 </div>
-                            </div>
+
+                                <div>
+                                    <button class="btn btn-primary w-100" type="submit">Login</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            document.getElementById('toggle-password').addEventListener('click', function () {
+                const input = document.getElementById('password');
+                const showing = input.type === 'text';
+
+                input.type = showing ? 'password' : 'text';
+                this.setAttribute('aria-label', showing ? 'Tampilkan password' : 'Sembunyikan password');
+            });
+        </script>
     </body>
 </html>
